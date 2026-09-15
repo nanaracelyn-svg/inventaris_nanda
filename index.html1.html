@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventaris Toko Nanda</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#1597bb">
+</head>
+
+<body>
+
+    <!-- ================= LOGIN ================= -->
+
+    <div id="loginPage" class="login-page">
+
+        <div class="login-box">
+
+            <div class="logo">
+                🛍️
+            </div>
+
+            <h1>Inventaris Nanda</h1>
+
+            <p class="login-subtitle">
+                Kelola barang toko dengan mudah ✨
+            </p>
+
+            <div class="input-group">
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Masukkan username"
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan password"
+                >
+            </div>
+
+            <button
+                class="login-button"
+                onclick="login()"
+            >
+                Masuk ke Toko →
+            </button>
+
+            <p id="loginError" class="login-error"></p>
+
+            <div class="login-info">
+                <span>💙</span>
+                <p>
+                    Selamat datang di<br>
+                    <b>Toko Inventaris Nanda</b>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= APLIKASI ================= -->
+
+    <div id="appPage" class="app-page hidden">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🛍️
+                </div>
+
+                <div>
+                    <h2>Nanda</h2>
+                    <span>Inventaris Toko</span>
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <button
+                    class="nav-item active"
+                    onclick="scrollKe('dashboard')"
+                >
+                    🏠
+                    <span>Dashboard</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    onclick="scrollKe('barangSection')"
+                >
+                    📦
+                    <span>Data Barang</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    onclick="scrollKe('tambahSection')"
+                >
+                    ➕
+                    <span>Tambah Barang</span>
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button
+                    class="theme-button"
+                    onclick="ubahTema()"
+                    id="themeButton"
+                >
+                    🌙
+                    <span>Mode Gelap</span>
+                </button>
+
+                <button
+                    class="logout-button"
+                    onclick="logout()"
+                >
+                    🚪
+                    <span>Keluar</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+
+            <div class="topbar">
+
+                <div>
+                    <p class="welcome-small">
+                        Selamat datang kembali 👋
+                    </p>
+
+                    <h1>Dashboard Inventaris</h1>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-icon">
+                        N
+                    </div>
+
+                    <div>
+                        <b>Nanda</b>
+                        <small>Admin Toko</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <section id="dashboard">
+
+                <div class="hero">
+
+                    <div>
+
+                        <span class="hero-label">
+                            ✨ TOKO NANDA
+                        </span>
+
+                        <h2>
+                            Kelola inventaris<br>
+                            jadi lebih mudah.
+                        </h2>
+
+                        <p>
+                            Catat dan pantau semua barang
+                            toko dalam satu tempat.
+                        </p>
+
+                    </div>
+
+                    <div class="hero-emoji">
+                        📦
+                    </div>
+
+                </div>
+
+
+                <!-- STATISTIK -->
+
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            📦
+                        </div>
+
+                        <div>
+                            <p>Total Jenis Barang</p>
+                            <h3 id="totalJenis">0</h3>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            🔢
+                        </div>
+
+                        <div>
+                            <p>Total Stok</p>
+                            <h3 id="totalStok">0</h3>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            ⚡
+                        </div>
+
+                        <div>
+                            <p>Stok Menipis</p>
+                            <h3 id="stokMenipis">0</h3>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TAMBAH BARANG -->
+
+            <section
+                id="tambahSection"
+                class="content-card"
+            >
+
+                <div class="section-title">
+
+                    <div>
+                        <span class="section-label">
+                            INVENTARIS
+                        </span>
+
+                        <h2>Tambah Barang</h2>
+                    </div>
+
+                    <div class="section-icon">
+                        ➕
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+
+                        <label>Kode Barang</label>
+
+                        <input
+                            type="text"
+                            id="kodeBarang"
+                            placeholder="Contoh: BRG001"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Nama Barang</label>
+
+                        <input
+                            type="text"
+                            id="namaBarang"
+                            placeholder="Contoh: Pulpen"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Jumlah Barang</label>
+
+                        <input
+                            type="number"
+                            id="jumlahBarang"
+                            placeholder="Contoh: 50"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="tambahBarang()"
+                >
+                    💾 Simpan Barang
+                </button>
+
+            </section>
+
+
+            <!-- DATA BARANG -->
+
+            <section
+                id="barangSection"
+                class="content-card"
+            >
+
+                <div class="section-title">
+
+                    <div>
+                        <span class="section-label">
+                            DATA TOKO
+                        </span>
+
+                        <h2>Daftar Barang</h2>
+                    </div>
+
+                    <div class="total-badge">
+                        <span id="jumlahData">0</span>
+                        Barang
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <span>🔎</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Cari kode atau nama barang..."
+                        oninput="cariBarang()"
+                    >
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Jumlah</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabelBarang">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    id="dataKosong"
+                    class="empty-state"
+                >
+                    📦
+                    <h3>Belum ada barang</h3>
+                    <p>
+                        Tambahkan barang pertama
+                        ke inventaris toko.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer>
+
+                <p>
+                    💙 Inventaris Toko Nanda
+                </p>
+
+                <span>
+                    Progressive Web App • Offline Ready
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
